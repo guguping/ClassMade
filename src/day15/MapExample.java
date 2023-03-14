@@ -17,8 +17,20 @@ public class MapExample {
 		// List이라는 인터페이스에  		ArrayList 라는 클래스의 생성자를 사용
 		
 		map1.put(1,"안녕하세요");
+//		System.out.println(map1.put(2, "hello"));
+//		System.out.println(map1.put(2, "ㅎㅎㅎㅎㅎ"));
 		
-		map1.get(1);
+//		String val1 = map1.get(1);
+//		System.out.println(val1);
+		
+		map1.remove(2);
+//		System.out.println(map1.get(2));
+		
+		for(Integer key : map1.keySet()) {
+			System.out.println(key);
+			System.out.println(map1.get(key));
+			
+		}
 		
 	}
 
