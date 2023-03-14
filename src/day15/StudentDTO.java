@@ -34,7 +34,4 @@ public class StudentDTO {
 		String str =  studentNumer+ "\t\t" +studentName+ "\t\t" +stuentMajor+ "\t\t" +stuentMobile;
 		return str;
 	}
-	public void print() {
-		System.out.printf("%s\t%d\t%d\t%d",studentNumer,studentName,stuentMajor,stuentMobile);
-	}
 }
