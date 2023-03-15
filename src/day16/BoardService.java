@@ -91,10 +91,10 @@ public class BoardService {
 			br.save(boardDTO);
 		}
 	}
-	public void seach() {
+	public void search() {
 	System.out.println("작성자글 검색 >");
-	String useach = sc.next();sc.nextLine();
-	List<BoardDTO> list = br.seach(useach);
+	String usearch = sc.next();sc.nextLine();
+	List<BoardDTO> list = br.search(usearch);
 	System.out.println("글번호\t제목\t\t작성자\t조회수\t게시일");
 	System.out.println("==============================================");
 	for(BoardDTO b : list) {

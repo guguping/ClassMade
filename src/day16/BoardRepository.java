@@ -69,13 +69,13 @@ public class BoardRepository {
 //			}
 //			return b;
 //		}
-	public List<BoardDTO> seach(String useach) {
+	
+	public List<BoardDTO> search(String usearch) {
 		ArrayList<BoardDTO> b = new ArrayList<>();
-		Map<String, BoardDTO> mapList = bRepository;
-		ArrayList<String> keyset = new ArrayList<>(mapList.keySet());
+		ArrayList<String> keyset = new ArrayList<>(bRepository.keySet());
 		keyset.sort(Comparator.naturalOrder());
 		for (String m : keyset) {
-			if (bRepository.get(m).getWriter().equals(useach)) {
+			if (bRepository.get(m).getWriter().equals(usearch)) {
 				BoardDTO boardDTO = new BoardDTO();
 				boardDTO = bRepository.get(m);
 				b.add(boardDTO);

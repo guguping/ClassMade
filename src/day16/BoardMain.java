@@ -28,7 +28,7 @@ public class BoardMain {
 			}else if(menu == 6) {
 				service.test();
 			}else if(menu ==7) {
-				service.seach();
+				service.search();
 			}else if (menu ==0) {
 				System.out.println("종료합니다");
 				break;
