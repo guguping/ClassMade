@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import day11.BoardDTO;
 import day15.StudentDTO;
 
 public class BoardRepository {
@@ -23,36 +24,33 @@ public class BoardRepository {
 		}
 		
 		public BoardDTO findById(String bno){
-			for(BoardDTO b : list) {
-				if(b.getBno().equals(bno)) {
-					return b;
+			for(String b : bRepository.keySet()) {
+				if(bRepository.get(b).getBno().equals(bno)) {
+					BoardDTO a = bRepository.get(b);
+					return a;
 				}
 			}
 			return null;
 		}
 		
 		public boolean update(BoardDTO boardDTO , String bno) {
-			for(BoardDTO b : list) {
-				if(b.getBno().equals(bno)) {
-					b.setTitle(boardDTO.getTitle());
-					b.setWriter(boardDTO.getWriter());
+			for(String b : bRepository.keySet()) {
+				if(bRepository.get(b).getBno().equals(bno)) {
+					BoardDTO a = bRepository.get(b);
+					a.setTitle(boardDTO.getTitle());
+					a.setWriter(boardDTO.getWriter());
 					return true;
 				}
 			}
 			return false;
+					
 		}
 		
-		// 내가만든 삭제
-		public void remove(BoardDTO boardDTO) {
-			
-			list.remove(boardDTO);
-		}
 		// 선생님이 만든 삭제
 		public boolean delete(String bno) {
-			for(BoardDTO b : list) {
-				if(b.getBno().equals(bno)) {
-					
-					list.remove(b);
+			for(String b : bRepository.keySet()) {
+				if(bRepository.get(b).getBno().equals(bno)) {
+					bRepository.remove(b);
 					return true;
 				}
 			}

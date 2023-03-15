@@ -24,7 +24,7 @@ public class BoardMain {
 			}else if (menu ==4) {
 				service.update();
 			}else if (menu ==5) {
-				service.remove();
+				service.delete();
 			}else if (menu ==0) {
 				System.out.println("종료합니다");
 				break;

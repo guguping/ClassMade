@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 //담은 정보를 가공하는 곳
 
+import day11.BoardDTO;
+
 public class BoardService {
 	BoardRepository br = new BoardRepository();
 	Scanner sc = new Scanner(System.in);
@@ -62,23 +64,10 @@ public class BoardService {
 		}
 	}
 	
-	// 내가 만든 삭제
-	public void remove() {
-		System.out.println("삭제할 글 번호 >");
-		String bno = sc.next();sc.nextLine();
-		BoardDTO boardDTO = br.findById(bno);
-		if (boardDTO == null) {
-			System.out.println("찾을 수 없는 글입니다");
-		} else {
-			br.remove(boardDTO);
-			System.out.println("삭제 완료");
-		}
-	}
-	
 	// 선생님이 만든 삭제
 	public void delete() {
 		System.out.println("삭제할 글 번호");
-		String bno = sc.next();
+		String bno = sc.next();sc.nextLine();
 		if(br.delete(bno)) {
 			System.out.println("삭제 완료");
 		}else {
