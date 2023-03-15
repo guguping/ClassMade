@@ -32,7 +32,7 @@ public class BoardService {
 
 	public void findById() {
 		System.out.println("읽을 글 번호");
-		String bno = sc.next();
+		String bno = sc.next();sc.nextLine();
 		BoardDTO boardDTO = br.findById(bno);
 		if (boardDTO == null) {
 			System.out.println("찾을 수 없는 글입니다");

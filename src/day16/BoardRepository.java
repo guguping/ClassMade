@@ -14,7 +14,7 @@ public class BoardRepository {
 		private Map<String, BoardDTO> bRepository = new HashMap<>();
 
 		public void save(BoardDTO boardDTO) {
-			bRepository.put(boardDTO.getBno(), boardDTO);
+			bRepository.put( boardDTO.getBno() , boardDTO);
 			// add는 list의 숨겨진 메소드이다
 			// 저장되면 true를 리턴하고 저장 실패하면 false를 리턴한다
 		}
@@ -25,7 +25,7 @@ public class BoardRepository {
 		
 		public BoardDTO findById(String bno){
 			for(String b : bRepository.keySet()) {
-				if(bRepository.get(b).getBno().equals(bno)) {
+				if(b.equals(bno)) {
 					BoardDTO a = bRepository.get(b);
 					return a;
 				}
