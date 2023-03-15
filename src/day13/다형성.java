@@ -10,11 +10,12 @@ public class 다형성 {
 		//특이점은 자식객체에서 오버라이딩 된 것만 자식메소드를 사용가능하다
 		a = new Dog(); 
 		//필드에도 상속받는 객체를 넣을 수 있다
+		ab.cry();
+		a.cry();
 	}
 }
 // Animal을 상속자받아 cry를 오버라이딩
 class Animal{
-	Animal a = new Animal();
 	public void eat() {
 		System.out.println("먹다");
 	}

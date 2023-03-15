@@ -1,5 +1,7 @@
 package day15;
 
+import java.util.Objects;
+
 public class StudentDTO_T {
 	private Long id; // 관리번호
 	private String studentNumber; // 학번
@@ -42,6 +44,23 @@ public class StudentDTO_T {
 	public String toString() {
 		return "StudentDTO [id=" + id + ", studentNumber=" + studentNumber + ", studentName=" + studentName
 				+ ", studentMajor=" + studentMajor + ", studentMobile=" + studentMobile + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, studentMajor, studentMobile, studentName, studentNumber);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StudentDTO_T other = (StudentDTO_T) obj;
+		return Objects.equals(id, other.id) && Objects.equals(studentMajor, other.studentMajor)
+				&& Objects.equals(studentMobile, other.studentMobile) && Objects.equals(studentName, other.studentName)
+				&& Objects.equals(studentNumber, other.studentNumber);
 	}
 	
 	
