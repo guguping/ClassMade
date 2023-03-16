@@ -14,6 +14,7 @@ public class BoardService {
 	BoardRepository br = new BoardRepository();
 	Scanner sc = new Scanner(System.in);
 
+	
 	public void save() {
 		BoardDTO boardDTO = new BoardDTO();
 		System.out.print("제목 >");
@@ -21,7 +22,11 @@ public class BoardService {
 		System.out.print("작성자 >");
 		boardDTO.setWriter(sc.next());
 		sc.nextLine();
-		br.save(boardDTO);
+		if(br.save(boardDTO)) {
+			System.out.println("업로드 완료");
+		}else {
+			System.out.println("업로드 실패");
+		}
 	}
 
 	public void findAll() {
@@ -30,7 +35,10 @@ public class BoardService {
 		System.out.println("==============================================");
 		Map<String, BoardDTO> mapList = br.findAll();
 		ArrayList<String> keyset = new ArrayList<>(mapList.keySet());
+		// keyset이라는 리스트를 선언하고 = ArrayList에 매개변수로 Map.keyset을 사용해 
+		// 								Map.keyset으로 이루어진 ArrayList를 만들었다
 		keyset.sort(Comparator.naturalOrder());
+		// ArrayList는 저장하면서 저장공간이 늘어나고 sort는 정렬한다
 		for (String u : keyset) {
 			mapList.get(u).print();
 		}
@@ -58,12 +66,11 @@ public class BoardService {
 		if (b == null) {
 			System.out.println("찾을 수 없는 글입니다");
 		} else {
-			BoardDTO boardDTO = new BoardDTO();
 			System.out.print("수정할 제목 >");
-			boardDTO.setTitle(sc.nextLine());
+			String updateTitle = sc.nextLine();
 			System.out.print("수정할 작성자 >");
-			boardDTO.setWriter(sc.nextLine());
-			if (br.update(boardDTO, bno)) {
+			String updateWriter = sc.nextLine();
+			if (br.update(bno , updateTitle , updateWriter )) {
 				System.out.println("업데이트 완료!");
 			} else {
 				System.out.println("업데이트 실패!");
