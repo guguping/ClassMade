@@ -55,7 +55,6 @@ public class BoardRepository {
 		}
 		return false;
 	}
-
 	// 선생님이 만든 삭제
 	public boolean delete(String bno) {
 		for (String b : bRepository.keySet()) {
