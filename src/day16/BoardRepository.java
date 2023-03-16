@@ -17,7 +17,7 @@ public class BoardRepository {
 	ArrayList<String> keyset = new ArrayList<>(bRepository.keySet());
 
 	public void save(BoardDTO boardDTO) {
-		bRepository.put(boardDTO.getBno(), boardDTO);
+		bRepository.put(boardDTO.getBno() , boardDTO);
 	}
 
 	public Map<String, BoardDTO> findAll() {
@@ -76,9 +76,7 @@ public class BoardRepository {
 		search.sort(Comparator.naturalOrder());
 		for (String m : search) {
 			if (bRepository.get(m).getWriter().equals(usearch)) {
-				BoardDTO boardDTO = new BoardDTO();
-				boardDTO = bRepository.get(m);
-				b.add(boardDTO);
+				b.add(bRepository.get(m));
 			}
 		}
 		return b;
