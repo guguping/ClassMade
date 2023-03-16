@@ -25,13 +25,13 @@ public class BoardService {
 	}
 
 	public void findAll() {
-		
+
 		System.out.println("글번호\t제목\t\t작성자\t조회수\t게시일");
 		System.out.println("==============================================");
 		Map<String, BoardDTO> mapList = br.findAll();
 		ArrayList<String> keyset = new ArrayList<>(mapList.keySet());
 		keyset.sort(Comparator.naturalOrder());
-		for (String u : keyset ) {
+		for (String u : keyset) {
 			mapList.get(u).print();
 		}
 	}
@@ -91,17 +91,22 @@ public class BoardService {
 			br.save(boardDTO);
 		}
 	}
+
 	public void search() {
-	System.out.println("작성자글 검색 >");
-	String usearch = sc.next();sc.nextLine();
-	List<BoardDTO> list = br.search(usearch);
-	System.out.println("글번호\t제목\t\t작성자\t조회수\t게시일");
-	System.out.println("==============================================");
-	for(BoardDTO b : list) {
-		b.print();
+		System.out.println("작성자글 검색 >");
+		String usearch = sc.next();
+		sc.nextLine();
+		System.out.println("글번호\t제목\t\t작성자\t조회수\t게시일");
+		System.out.println("==============================================");
+		if (br.search(usearch).size() == 0) {
+			System.out.println("없는 작성자입니다");
+		} else if (br.search(usearch).size() != 0) {
+			for (BoardDTO b : br.search(usearch)) {
+				b.print();
+			}
+		}
 	}
-}
-	
+
 //	public void seach() {
 //		System.out.println("작성자글 검색 >");
 //		String useach = sc.next();sc.nextLine();
