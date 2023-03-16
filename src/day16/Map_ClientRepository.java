@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import day11.BoardDTO;
+
 public class Map_ClientRepository {
 	List<Map_BreakdownDTO> bList = new ArrayList<>();
 	Map<String, Map_ClientDTO> c = new HashMap<>();
@@ -18,8 +20,8 @@ public class Map_ClientRepository {
 	}
 
 	public boolean save(Map_ClientDTO DTO) {
-		Map_ClientDTO d = c.put(DTO.getAccount(), DTO);
-		if(d == null) {
+		Map_ClientDTO result = c.put(DTO.getAccount(), DTO);
+		if(result == null) {
 			return true;
 		}else {
 			return false;
@@ -60,7 +62,7 @@ public class Map_ClientRepository {
 	public boolean deposit(String Account, long money) {
 		for(String d : c.keySet()) {
 			if(c.get(d).getAccount().equals(Account)) {
-				c.get(d).setBalance(c.get(d).getBalance()+money);;
+				c.get(d).setBalance(c.get(d).getBalance()+money);
 				Map_BreakdownDTO breakdownDTO = new Map_BreakdownDTO();
 				breakdownDTO.setAccount(Account);
 				breakdownDTO.setDivision("입금");
@@ -99,10 +101,10 @@ public class Map_ClientRepository {
 		}
 		return null;
 	}
-	public Map<String, Map_ClientDTO> findById(String loginId, String loginPw) {
+	public Map_ClientDTO findById(String loginId, String loginPw) {
 		for(String d : c.keySet()) {
 			if(c.get(d).getId().equals(loginId)&&c.get(d).getPassword().equals(loginPw)) {
-				return c;
+				return c.get(d);
 			}
 		}
 		return null;

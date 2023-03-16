@@ -54,7 +54,7 @@ public class Map_ClientService {
 		System.out.println("계좌번호\t\t아이디\t비밀번호\t예금주\t잔액\t가입일");
 		System.out.println("----------------------------------------------------");
 		for(String c : cList.keySet()) {
-			System.out.println(c.toString());
+			System.out.println(cList.get(c).toString());
 		}
 	}
 	public void logout() {
@@ -103,15 +103,15 @@ public class Map_ClientService {
 		}
 	}
 	public void findById() {
-		Map<String, Map_ClientDTO> DTO = br.findById(loginId , loginPw);
-		if( DTO == null) {
+		Map_ClientDTO d = br.findById(loginId , loginPw);
+		if( d == null) {
 			System.out.println("이걸본 당신 최고야");
 		}else {
 			System.out.println("----------------------------▼사용자정보▼-----------------------------");
 			System.out.println("계좌번호\t\t아이디\t비밀번호\t예금주\t잔액\t가입일");
 			System.out.println("------------------------------------------------------------------");
-			System.out.println(DTO.toString());
-			List<Map_BreakdownDTO> bList = br.breakList(DTO.get(DTO).getAccount());
+			System.out.println(d.toString());
+			List<Map_BreakdownDTO> bList = br.breakList(d.getAccount());
 			if(bList.size()==0) {
 				System.out.println("----------------------------▼입출금내역▼-----------------------------");
 				System.out.println("입출금 내역이 없습니다");

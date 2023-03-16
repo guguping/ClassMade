@@ -7,7 +7,7 @@ import day13.ClientService;
 public class Map_ClientMain {
 
 	public static void main(String[] args) {
-		ClientService service = ClientService.getInstance();
+		Map_ClientService service = Map_ClientService.getInstance();
 		Scanner sc = new Scanner(System.in);
 		boolean loginOk = false;
 		while (true) {
