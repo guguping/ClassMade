@@ -115,14 +115,13 @@ public class Map_ClientService {
 			System.out.println("계좌번호\t\t아이디\t비밀번호\t예금주\t잔액\t가입일");
 			System.out.println("------------------------------------------------------------------");
 			System.out.println(d.toString());
-			List<Map_BreakdownDTO> dlist = br.breakList(d.getAccount());
-			if(dlist==null) {
+			if(br.breakList(d.getAccount())==null) {
 				System.out.println("----------------------------▼입출금내역▼-----------------------------");
 				System.out.println("입출금 내역이 없습니다");
 			}else {
 				System.out.println("----------------------------▼입출금내역▼-----------------------------");
 				System.out.println("계좌번호\t\t거래내역\t거래액\t잔액\t가입일");
-				for(Map_BreakdownDTO b : dlist) {
+				for(Map_BreakdownDTO b : br.breakList(d.getAccount())) {
 					System.out.println(b.toString());
 				}
 			}
