@@ -1,5 +1,7 @@
 package day16;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -51,9 +53,11 @@ public class Map_ClientService {
 	}
 	public void findAll() {
 		Map<String, Map_ClientDTO > cList = br.findAll();
+		ArrayList<String> keyset = new ArrayList<>(cList.keySet());
+		keyset.sort(Comparator.naturalOrder());
 		System.out.println("계좌번호\t\t아이디\t비밀번호\t예금주\t잔액\t가입일");
 		System.out.println("----------------------------------------------------");
-		for(String c : cList.keySet()) {
+		for(String c : keyset) {
 			System.out.println(cList.get(c).toString());
 		}
 	}
@@ -111,14 +115,14 @@ public class Map_ClientService {
 			System.out.println("계좌번호\t\t아이디\t비밀번호\t예금주\t잔액\t가입일");
 			System.out.println("------------------------------------------------------------------");
 			System.out.println(d.toString());
-			List<Map_BreakdownDTO> bList = br.breakList(d.getAccount());
-			if(bList.size()==0) {
+			List<Map_BreakdownDTO> dlist = br.breakList(d.getAccount());
+			if(dlist==null) {
 				System.out.println("----------------------------▼입출금내역▼-----------------------------");
 				System.out.println("입출금 내역이 없습니다");
 			}else {
 				System.out.println("----------------------------▼입출금내역▼-----------------------------");
 				System.out.println("계좌번호\t\t거래내역\t거래액\t잔액\t가입일");
-				for(Map_BreakdownDTO b : bList) {
+				for(Map_BreakdownDTO b : dlist) {
 					System.out.println(b.toString());
 				}
 			}

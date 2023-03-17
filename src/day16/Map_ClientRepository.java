@@ -8,7 +8,7 @@ import java.util.Map;
 import day11.BoardDTO;
 
 public class Map_ClientRepository {
-	List<Map_BreakdownDTO> bList = new ArrayList<>();
+	Map<Integer, Map_BreakdownDTO> b = new HashMap<>();
 	Map<String, Map_ClientDTO> c = new HashMap<>();
 	private static Map_ClientRepository repository = new Map_ClientRepository();
 
@@ -68,7 +68,7 @@ public class Map_ClientRepository {
 				breakdownDTO.setDivision("입금");
 				breakdownDTO.setDealMoney(money);
 				breakdownDTO.setTotalMoney(c.get(d).getBalance());
-				bList.add(breakdownDTO);
+				b.put(breakdownDTO.getDpo(),breakdownDTO);
 				return true;
 			}
 		}
@@ -84,7 +84,7 @@ public class Map_ClientRepository {
 					breakdownDTO.setDivision("출금");
 					breakdownDTO.setDealMoney(money);
 					breakdownDTO.setTotalMoney(c.get(d).getBalance());
-					bList.add(breakdownDTO);
+					b.put(breakdownDTO.getWit(),breakdownDTO);
 					return true;
 				}else {
 					return false;
@@ -111,9 +111,9 @@ public class Map_ClientRepository {
 	}
 	public List<Map_BreakdownDTO> breakList(String Account) {
 		List<Map_BreakdownDTO> list = new ArrayList<>();
-		for (Map_BreakdownDTO b : bList) {
-			if (b.getAccount().equals(Account)) {
-				list.add(b);
+		for (Integer q : b.keySet()) {
+			if (b.get(q).getAccount().equals(Account)) {
+				list.add(b.get(q));
 			}
 		}
 		return list;

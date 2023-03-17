@@ -11,8 +11,12 @@ public class Map_BreakdownDTO {
 	private long dealMoney;
 	private long totalMoney;
 	private String dealDate;
+	private static int dpo = 0;
+	private static int wit = 0;
 	
 	public Map_BreakdownDTO() {
+		this.dpo++;
+		this.wit++;
 		this.dealDate = DTF.format(LocalDateTime.now());
 	}
 	
@@ -44,5 +48,12 @@ public class Map_BreakdownDTO {
 		String str = account +"\t"+ division +"\t"+ dealMoney +"\t"+ totalMoney +"\t"+ dealDate;
 		return str;
 	}
-	
+	public int getDpo() {
+		return dpo;
+	}
+	public int getWit() {
+		return wit;
+	}
+
+
 }
