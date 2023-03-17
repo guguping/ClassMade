@@ -20,14 +20,25 @@ public class Map_ClientRepository {
 		return repository;
 	}
 
-	public boolean save(Map_ClientDTO DTO) {
-		if (c.put(DTO.getAccount(), DTO) == null) {
-			return true;
-		} else {
-			return false;
+	public Integer save(Map_ClientDTO DTO) {
+		for (String d : c.keySet()) {
+			if (DTO.getId().equals(c.get(d).getId())) {
+				return 1;
+			}
 		}
-		// 실행문이 하나 일때만 중괄호를 생략할 수 있다
+		if (c.put(DTO.getAccount(), DTO) == null) {
+			return 2;
+		}else {
+			return 3;
+		}
+
 	}
+//		if (c.put(DTO.getAccount(), DTO) == null) 
+//			return true;
+//		 else 
+//			return false;
+//		
+	// 실행문이 하나 일때만 중괄호를 생략할 수 있다
 
 	public boolean loginCheak(String id, String pw) {
 		for (String d : c.keySet()) {

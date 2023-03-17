@@ -29,10 +29,12 @@ public class Map_ClientService {
 		DTO.setPassword(sc.next());
 		System.out.print("이름 >");
 		DTO.setName(sc.next());
-		if(br.save(DTO)) {
+		if(br.save(DTO) == 2) {
 			System.out.println("가입 성공");
-		}else {
-			System.out.println("가입 실패");
+		}else if(br.save(DTO) == 1){
+			System.out.println("아이디 중복");
+		}else if(br.save(DTO) == 3){
+			System.out.println("세션 오류");
 		}
 	}
 
