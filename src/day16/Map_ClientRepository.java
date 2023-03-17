@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Map_ClientRepository {
 	Map<Integer, Map_BreakdownDTO> b = new HashMap<>();
@@ -20,26 +21,25 @@ public class Map_ClientRepository {
 		return repository;
 	}
 
-	public Integer save(Map_ClientDTO DTO) {
-		for (String d : c.keySet()) {
-			if (DTO.getId().equals(c.get(d).getId())) {
-				return 1;
+	public boolean save( Map_ClientDTO DTO) {
+		if(c.put(DTO.getAccount(), DTO)==null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public String idCheak(String id) {
+		Scanner sc = new Scanner(System.in);
+		for(String p : c.keySet()) {
+			if(c.get(p).getId().equals(id)) {
+				System.out.println("중복 아이디");
+				System.out.print("다시입력 >");
+				id = sc.next();
+				continue;
 			}
 		}
-		if (c.put(DTO.getAccount(), DTO) == null) {
-			return 2;
-		}else {
-			return 3;
-		}
-
+		return id;
 	}
-//		if (c.put(DTO.getAccount(), DTO) == null) 
-//			return true;
-//		 else 
-//			return false;
-//		
-	// 실행문이 하나 일때만 중괄호를 생략할 수 있다
-
 	public boolean loginCheak(String id, String pw) {
 		for (String d : c.keySet()) {
 			if (c.get(d).getId().equals(id) && c.get(d).getPassword().equals(pw)) {
@@ -94,6 +94,7 @@ public class Map_ClientRepository {
 			if (c.get(d).getAccount().equals(Account)) {
 				if (c.get(d).getBalance() >= money) {
 					c.get(d).setBalance(c.get(d).getBalance() - money);
+//					String key = d ;
 					Map_BreakdownDTO breakdownDTO = new Map_BreakdownDTO();
 					breakdownDTO.setAccount(Account);
 					breakdownDTO.setDivision("출금");
@@ -108,6 +109,15 @@ public class Map_ClientRepository {
 		}
 		return false;
 	}
+//	public boolean print(String Account , long money , String key) {
+//		Map_BreakdownDTO breakdownDTO = new Map_BreakdownDTO();
+//		breakdownDTO.setAccount(Account);
+//		breakdownDTO.setDivision("입금");
+//		breakdownDTO.setDealMoney(money);
+//		breakdownDTO.setTotalMoney(c.get(d).getBalance());
+//		b.put(breakdownDTO.getDpo(), breakdownDTO);
+//		return true;
+//	}
 
 	public String getAccount(String loginId, String loginPw) {
 		for (String s : c.keySet()) {
