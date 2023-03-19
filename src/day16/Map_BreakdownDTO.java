@@ -19,7 +19,6 @@ public class Map_BreakdownDTO {
 		this.wit++;
 		this.dealDate = DTF.format(LocalDateTime.now());
 	}
-	
 	public String getAccount() {
 		return account;
 	}
@@ -54,6 +53,16 @@ public class Map_BreakdownDTO {
 	public int getWit() {
 		return wit;
 	}
-
-
+	public void getdw(Map_ClientDTO Account , long money , Integer key) {
+		if(key == null) {
+		Account.setBalance(Account.getBalance() + money);
+		this.division = "입금";
+		} else {
+			Account.setBalance(Account.getBalance() - money);
+		this.division = "출금";
+		}
+		this.account = Account.getAccount();
+		this.dealMoney = money;
+		this.totalMoney = Account.getBalance();
+	}
 }

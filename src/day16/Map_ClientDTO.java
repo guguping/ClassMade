@@ -23,7 +23,6 @@ public class Map_ClientDTO {
 		this.account = firstNumber+"-"+number++;
 		this.joinDate = DTF.format(LocalDateTime.now());
 	}
-	
 	public String getAccount() {
 		return account;
 	}
@@ -55,6 +54,4 @@ public class Map_ClientDTO {
 		String str = account+"\t"+id+"\t"+password+"\t"+name+"\t"+balance+"\t"+joinDate;
 		return str;
 	}
-	
-	
 }

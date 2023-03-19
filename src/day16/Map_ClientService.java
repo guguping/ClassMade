@@ -2,7 +2,6 @@ package day16;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -18,7 +17,6 @@ public class Map_ClientService {
 	public static Map_ClientService getInstance() {
 		return service;
 	}
-
 	// 싱글톤패턴
 	private String loginId = null;
 	private String loginPw = null;
@@ -28,8 +26,11 @@ public class Map_ClientService {
 		while (true) {
 			System.out.print("id >");
 			String id = sc.next();
-			br.idCheak(id);
-			DTO.setId(br.idCheak(id));
+			if (br.idCheak(id)) {
+				System.out.println("중복 아이디");
+				continue;
+			}
+			DTO.setId(id);
 			System.out.print("password >");
 			DTO.setPassword(sc.next());
 			System.out.print("이름 >");
@@ -37,29 +38,11 @@ public class Map_ClientService {
 			if (br.save(DTO)) {
 				System.out.println("가입 성공");
 				break;
-			}else {
+			} else {
 				System.out.println("세션 오류");
 			}
 		}
 	}
-
-//		while (true) {
-//			System.out.print("id >");
-//			DTO.setId(sc.next());
-//			System.out.print("password >");
-//			DTO.setPassword(sc.next());
-//			System.out.print("이름 >");
-//			DTO.setName(sc.next());
-//			if (br.save(DTO)) {
-//				System.out.println("가입 성공");
-//				break;
-//			}else if(!br.save(DTO)) {
-//				System.out.println("중복 아이디");
-//				continue;
-//			}
-//		}
-//	}
-
 	public boolean loginCheak() {
 		System.out.print("id >");
 		String id = sc.next();
@@ -75,7 +58,6 @@ public class Map_ClientService {
 			return false;
 		}
 	}
-
 	public void findAll() {
 		Map<String, Map_ClientDTO> cList = br.findAll();
 		ArrayList<String> keyset = new ArrayList<>(cList.keySet());
@@ -86,42 +68,67 @@ public class Map_ClientService {
 			System.out.println(cList.get(c).toString());
 		}
 	}
-
 	public void logout() {
 		loginId = null;
 		loginPw = null;
 		System.out.println("로그아웃");
 	}
-
 	public boolean delete() {
-		if (br.delete(loginId, loginPw)) {
+		if (br.loginCheak(loginId, loginPw)) {
+			br.delete();
 			System.out.println("삭제 성공");
-			return false;
 		} else {
 			System.out.println("삭제 실패");
-			return true;
 		}
+		return false;
 	}
-
-	public void update() {
+	public boolean update() {
 		System.out.print("비밀번호 확인 >");
 		String passowrd = sc.next();
 		if (loginPw.equals(passowrd)) {
 			System.out.print("수정할 비밀번호 >");
 			String updatePassword = sc.next();
-			if (br.update(loginId, loginPw, updatePassword)) {
-				loginPw = updatePassword;
+			if (br.loginCheak(loginId, loginPw)) {
+				br.update(updatePassword);
 				System.out.println("업데이트 성공");
+				loginId = null;
+				loginPw = null;
+				return true;
 			} else {
 				System.out.println("업데이트 실패");
+				return false;
 			}
 		} else {
 			System.out.println("비밀번호 확인필요");
+			return false;
 		}
 	}
+	public void findById() {
+		Map_ClientDTO d = br.findById();
+		if (d == null) {
+			System.out.println("이걸본 당신 최고야");
+		} else {
+			System.out.println("----------------------------▼사용자정보▼-----------------------------");
+			System.out.println("계좌번호\t\t아이디\t비밀번호\t예금주\t잔액\t가입일");
+			System.out.println("------------------------------------------------------------------");
+			System.out.println(d.toString());
+			if (br.breakList(d.getAccount()).size() == 0) {
+				System.out.println("----------------------------▼입출금내역▼-----------------------------");
+				System.out.println("계좌번호\t\t거래내역\t거래액\t잔액\t가입일");
+				System.out.println("입출금 내역이 없습니다");
+			} else {
+				System.out.println("----------------------------▼입출금내역▼-----------------------------");
+				System.out.println("계좌번호\t\t거래내역\t거래액\t잔액\t가입일");
+				for (Map_BreakdownDTO w : br.breakList(d.getAccount())) {
+					System.out.println(w.toString());
+				}
+			}
+			System.out.println("-----------------------------------------------------------------");
+		}
 
+	}
 	public void deposit() {
-		String account = br.getAccount(loginId, loginPw);
+		Map_ClientDTO account = br.findById();
 		if (account == null) {
 			System.out.println("이걸본 당신 최고야");
 		} else {
@@ -134,32 +141,8 @@ public class Map_ClientService {
 			}
 		}
 	}
-
-	public void findById() {
-		Map_ClientDTO d = br.findById(loginId, loginPw);
-		if (d == null) {
-			System.out.println("이걸본 당신 최고야");
-		} else {
-			System.out.println("----------------------------▼사용자정보▼-----------------------------");
-			System.out.println("계좌번호\t\t아이디\t비밀번호\t예금주\t잔액\t가입일");
-			System.out.println("------------------------------------------------------------------");
-			System.out.println(d.toString());
-			if (br.breakList(d.getAccount()) == null) {
-				System.out.println("----------------------------▼입출금내역▼-----------------------------");
-				System.out.println("입출금 내역이 없습니다");
-			} else {
-				System.out.println("----------------------------▼입출금내역▼-----------------------------");
-				System.out.println("계좌번호\t\t거래내역\t거래액\t잔액\t가입일");
-				for (Map_BreakdownDTO b : br.breakList(d.getAccount())) {
-					System.out.println(b.toString());
-				}
-			}
-			System.out.println("-----------------------------------------------------------------");
-		}
-	}
-
 	public void withdraw() {
-		String Account = br.getAccount(loginId, loginPw);
+		Map_ClientDTO Account = br.findById();
 		if (Account == null) {
 			System.out.println("이걸본 당신 최고야");
 		} else {
@@ -172,20 +155,19 @@ public class Map_ClientService {
 			}
 		}
 	}
-
 	public void transfer() {
-		String Account = br.getAccount(loginId, loginPw);
+		Map_ClientDTO Account = br.findById();
 		if (Account == null) {
 			System.out.println("로그인 오류");
 			return;
 		}
 		System.out.println("이체받는 계좌 >");
 		String transferAccount = sc.next();
-		System.out.println("이체받는 금액 >");
+		System.out.println("이체하는 금액 >");
 		long transferMoney = sc.nextLong();
-		if (br.transferCheck(transferAccount)) {
+		if (br.getAccount(transferAccount)!=null) {
 			if (br.withdraw(Account, transferMoney)) {
-				if (br.deposit(transferAccount, transferMoney)) {
+				if (br.deposit(br.getAccount(transferAccount) , transferMoney)) {
 					System.out.println("이체 완료");
 				}
 			} else {
