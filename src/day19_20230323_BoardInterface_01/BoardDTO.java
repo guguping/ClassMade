@@ -17,7 +17,6 @@ public class BoardDTO {
 		this.bno = "B"+number++;
 		this.postDate = DTF.format(LocalDateTime.now());
 	}
-	
 	public String getBno() {
 		return bno;
 	}

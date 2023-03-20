@@ -2,8 +2,6 @@ package day16;
 
 import java.util.Scanner;
 
-import day13.ClientService;
-
 public class Map_ClientMain {
 
 	public static void main(String[] args) {

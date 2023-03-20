@@ -6,7 +6,10 @@ public class BoardMain {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		BoardServiceInt service = new BoardService1();		
+		//map 로 사용
+		BoardServiceInt service = new BoardService1();
+		//list 으로 사용
+		// BoardServiceInt service = new BoardService2();
 		while (true) {
 			System.out.println("=====게시판=====");
 			System.out.println("1.게시글등록 2.리스트 3.읽기 4.수정 5.삭제 6.테스트데이터입력 0.종료");

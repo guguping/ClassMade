@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class BoardService2 implements BoardServiceInt {
 	BoardRepository2 br = new BoardRepository2();
 	Scanner sc = new Scanner(System.in);
-
+	@Override
 	public void save() {
 		BoardDTO boardDTO = new BoardDTO();
 
@@ -25,7 +25,7 @@ public class BoardService2 implements BoardServiceInt {
 			System.out.println("게시글 등록실패ㅜ");
 		}
 	}
-
+	@Override
 	public void findAll() {
 		List<BoardDTO> list = br.findAll();
 		System.out.println("글번호\t제목\t\t작성자\t조회수\t게시일");
@@ -34,7 +34,7 @@ public class BoardService2 implements BoardServiceInt {
 			b.print();
 		}
 	}
-
+	@Override
 	public void findById() {
 		System.out.print("읽을 글번호> ");
 		String bno = sc.next();
@@ -48,7 +48,7 @@ public class BoardService2 implements BoardServiceInt {
 			boardDTO.print();
 		}
 	}
-
+	@Override
 	public void update() {
 		System.out.print("수정할 글번호> ");
 		String bno = sc.next();
@@ -70,7 +70,7 @@ public class BoardService2 implements BoardServiceInt {
 			}
 		}
 	}
-
+	@Override
 	public void delete() {
 		System.out.print("삭제할 글번호> ");
 		String bno = sc.next();
