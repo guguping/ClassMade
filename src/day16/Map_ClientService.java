@@ -11,9 +11,7 @@ public class Map_ClientService {
 	Map_ClientRepository br = Map_ClientRepository.getInstance();
 	private static Map_ClientService service = new Map_ClientService();
 
-	private Map_ClientService() {
-	}
-
+	private Map_ClientService() {}
 	public static Map_ClientService getInstance() {
 		return service;
 	}
@@ -110,7 +108,7 @@ public class Map_ClientService {
 		} else {
 			System.out.println("----------------------------▼사용자정보▼-----------------------------");
 			System.out.println("계좌번호\t\t아이디\t비밀번호\t예금주\t잔액\t가입일");
-			System.out.println("------------------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------------");
 			System.out.println(d.toString());
 			if (br.breakList(d.getAccount()).size() == 0) {
 				System.out.println("----------------------------▼입출금내역▼-----------------------------");
@@ -123,7 +121,7 @@ public class Map_ClientService {
 					System.out.println(w.toString());
 				}
 			}
-			System.out.println("-----------------------------------------------------------------");
+			System.out.println("-------------------------------------------------------------------");
 		}
 
 	}

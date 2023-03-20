@@ -9,11 +9,10 @@ public class Map_ClientRepository {
 	Map<Integer, Map_BreakdownDTO> b = new HashMap<>();
 	Map<String, Map_ClientDTO> c = new HashMap<>();
 	private String login = null;
-	private Integer key = 1;
+	private Integer key = null;
 	private static Map_ClientRepository repository = new Map_ClientRepository();
 
-	private Map_ClientRepository() {
-	}
+	private Map_ClientRepository() {}
 	public static Map_ClientRepository getInstance() {
 		return repository;
 	}
