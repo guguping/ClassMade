@@ -1,5 +1,5 @@
 package Made_2;
 
-public class GamebreakdownDTO {
+public class gamebreakdownDTO {
 
 }
