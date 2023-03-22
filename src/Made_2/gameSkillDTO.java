@@ -10,72 +10,44 @@ public class gameSkillDTO {
 	String menu2;
 	String menu3;
 	String menu4;
-//	String 좌종;
-//	String 스네이크;
-//	String 우종;
-//	String 붕권;
-//	String 월광섬;
-//	String 도발;
-//	String 도발제트어퍼;
-//	String 초풍;
-//	String 초오찌;
+	int skilld1;
+	int skilld2;
+	int skilld3;
 
-	public gameSkillDTO(Integer key) {
+	public gameSkillDTO(Integer key , gameCharacterDTO gc) {
 		String[] Skill = { "좌종", "스네이크", "우종", "붕권", "월광섬", "도발", "도발제트어퍼", "초풍", "초오찌" };
 		if (key == 1) {
 			skillBno = 1;
-//			this.좌종 = 10 + rand.nextInt(21);
-//			this.스네이크 = 10 + rand.nextInt(21);
-//			this.우종 = 10 + rand.nextInt(21);
-//			this.붕권 = 10 + rand.nextInt(21);
-//			this.월광섬 = 10 + rand.nextInt(21);
-//			this.도발 = 10 + rand.nextInt(21);
-//			this.도발제트어퍼 = 10 + rand.nextInt(21);
-//			this.초풍 = 10 + rand.nextInt(21);
-//			this.초오찌 = 10 + rand.nextInt(21);
-			
+			this.skilld1 = 10 + rand.nextInt(21)+gc.getAtt();
+			this.skilld2 = 10 + rand.nextInt(21)+gc.getAtt();
+			this.skilld3 = 10 + rand.nextInt(21)+gc.getAtt();
 		}else if(key == 2) {
 			skillBno = 2;
-//			this.좌종 = 5 + rand.nextInt(11);
-//			this.스네이크 = 5 + rand.nextInt(11);
-//			this.우종 = 5 + rand.nextInt(11);
-//			this.붕권 = 5 + rand.nextInt(11);
-//			this.월광섬 = 5 + rand.nextInt(11);
-//			this.도발 = 5 + rand.nextInt(11);
-//			this.도발제트어퍼 = 5 + rand.nextInt(11);
-//			this.초풍 = 5 + rand.nextInt(11);
-//			this.초오찌 = 5 + rand.nextInt(11);
+			this.skilld1 = 5 + rand.nextInt(11)+gc.getAtt();
+			this.skilld2 = 5 + rand.nextInt(11)+gc.getAtt();
+			this.skilld3 = 5 + rand.nextInt(11)+gc.getAtt();
 		}else if(key==3) {
 			skillBno = 3;
-//			this.좌종 = 1 + rand.nextInt(6);
-//			this.스네이크 = 1 + rand.nextInt(6);
-//			this.우종 = 1 + rand.nextInt(6);
-//			this.붕권 = 1 + rand.nextInt(6);
-//			this.월광섬 = 1 + rand.nextInt(6);
-//			this.도발 = 1 + rand.nextInt(6);
-//			this.도발제트어퍼 = 1 + rand.nextInt(6);
-//			this.초풍 = 1 + rand.nextInt(6);
-//			this.초오찌 = 1 + rand.nextInt(6);
+			this.skilld1 = 1 + rand.nextInt(6)+gc.getAtt();
+			this.skilld2 = 1 + rand.nextInt(6)+gc.getAtt();
+			this.skilld3 = 1 + rand.nextInt(6)+gc.getAtt();
 		}
-		this.menu1 = Skill[rand.nextInt(Skill.length)];
-		this.menu2 = Skill[rand.nextInt(Skill.length)];
-		this.menu3 = Skill[rand.nextInt(Skill.length)];
+		this.menu1 = Skill[rand.nextInt(Skill.length)]+"("+skilld1+")";
+		this.menu2 = Skill[rand.nextInt(Skill.length)]+"("+skilld2+")";
+		this.menu3 = Skill[rand.nextInt(Skill.length)]+"("+skilld3+")";
 	}
 	public String toString1() {
-		return "1."+menu1;
+		return menu1;
 	}
 	public String toString2() {
-		return "2."+menu2;
+		return menu2;
 	}
 	public String toString3() {
-		return "3."+menu3;
+		return menu3;
 	}
 	public String toString4() {
-		return "4."+menu4;
+		return menu4;
 	}
-//	public String toString5() {
-//		return "5."+menu1;
-//	}
 	public int getSkillBno() {
 		return skillBno;
 	}
@@ -114,6 +86,24 @@ public class gameSkillDTO {
 
 	public void setMenu4(String menu4) {
 		this.menu4 = menu4;
+	}
+	public int getSkilld1() {
+		return skilld1;
+	}
+	public void setSkilld1(int skilld1) {
+		this.skilld1 = skilld1;
+	}
+	public int getSkilld2() {
+		return skilld2;
+	}
+	public void setSkilld2(int skilld2) {
+		this.skilld2 = skilld2;
+	}
+	public int getSkilld3() {
+		return skilld3;
+	}
+	public void setSkilld3(int skilld3) {
+		this.skilld3 = skilld3;
 	}
 
 }

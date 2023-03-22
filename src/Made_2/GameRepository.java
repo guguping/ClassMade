@@ -14,7 +14,7 @@ public class gameRepository {
 	}
 
 	Map<Integer, gameCharacterDTO> g = new TreeMap<>();
-	Map<String, gameMonsterDTO> ga = new TreeMap<>();
+	Map<Integer, gameMonsterDTO> ga = new TreeMap<>();
 	Map<Integer, gameSkillDTO> gs = new TreeMap<>();
 
 	public String newGame(gameCharacterDTO DTO) {
@@ -28,7 +28,7 @@ public class gameRepository {
 
 	public boolean newMonster(gameMonsterDTO MTO) {
 		if (ga.put(MTO.getmodMon(), MTO) == null) {
-			for (String s : ga.keySet()) {
+			for (Integer s : ga.keySet()) {
 				return true;
 			}
 		}
@@ -38,9 +38,9 @@ public class gameRepository {
 		gs.put(STO.getSkillBno() , STO);
 	}
 
-	public String seeMap(String mkey) {
-		for (String s : ga.keySet()) {
-			if (ga.get(s).getmodMon().equals(mkey)) {
+	public String seeMap(Integer mkey) {
+		for (Integer s : ga.keySet()) {
+			if (ga.get(s).getmodMon() == (mkey)) {
 				return ga.get(s).toString();
 			}
 
@@ -64,9 +64,9 @@ public class gameRepository {
 			}
 		}
 	}
-	public gameMonsterDTO move(String mkey) {
-		for(String s : ga.keySet()) {
-			if(ga.get(s).getmodMon().equals(mkey)) {
+	public gameMonsterDTO move(Integer mkey) {
+		for(Integer s : ga.keySet()) {
+			if(ga.get(s).getmodMon() == (mkey)) {
 				return ga.get(s);
 			}
 		}
@@ -79,5 +79,35 @@ public class gameRepository {
 			}
 		}
 		return null;
+	}
+	public void death1(int mkey) {
+		for(int s : ga.keySet()) {
+			if(ga.get(s).getmodMon()== (mkey)) {
+				ga.get(s).setMon1hp(ga.get(s).getMon1hp()-gs.get(s).getSkilld1());
+				if(ga.get(s).getMon1hp() <= 0) {
+					System.out.println("몬스터  사망");
+				}
+			}
+		}
+	}
+	public void death2(int mkey) {
+		for(int s : ga.keySet()) {
+			if(ga.get(s).getmodMon()== (mkey)) {
+				ga.get(s).setMon1hp(ga.get(s).getMon1hp()-gs.get(s).getSkilld2());
+				if(ga.get(s).getMon1hp() <= 0) {
+					System.out.println("몬스터  사망");
+				}
+			}
+		}
+	}
+	public void death3(int mkey) {
+		for(int s : ga.keySet()) {
+			if(ga.get(s).getmodMon()== (mkey)) {
+				ga.get(s).setMon1hp(ga.get(s).getMon1hp()-gs.get(s).getSkilld3());
+				if(ga.get(s).getMon1hp() <= 0) {
+					System.out.println("몬스터  사망");
+				}
+			}
+		}
 	}
 }

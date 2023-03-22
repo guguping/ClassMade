@@ -14,7 +14,7 @@ public class gameService {
 	}
 
 	int key = 0;
-	String mkey = null;
+	int mkey = 0;
 	int strkey = 0;
 
 	public Integer newgame() {
@@ -26,7 +26,7 @@ public class gameService {
 			if (newS.equals("y") || newS.equals("Y")) {
 				br.reStart(key);
 				key = 0;
-				mkey = null;
+				mkey = 0;
 			} else if (newS.equals("n") || newS.equals("N")) {
 				return null;
 			} else {
@@ -39,7 +39,7 @@ public class gameService {
 			key = sc.nextInt();
 			gameCharacterDTO gc = new gameCharacterDTO(key);
 			gameMonsterDTO go = new gameMonsterDTO(key);
-			gameSkillDTO sk = new gameSkillDTO(key);
+			gameSkillDTO sk = new gameSkillDTO(key, gc);
 			br.newSkill(sk);
 			br.newMonster(go);
 			mkey = go.getmodMon();
@@ -98,17 +98,40 @@ public class gameService {
 	public Integer move() {
 		gameMonsterDTO mon = br.move(mkey);
 
-		System.out.println("\n\u001B[31m    \t 앗! 야생의 "+mon.getMon1()+"이 나타났다!\n\u001B[0m");
+		System.out.println("\n\u001B[31m    \t 앗! 야생의 " + mon.getMon1() + "이 나타났다!\n\u001B[0m");
 		System.out.println(mon.toString1());
 		return 2;
 	}
+
+	public void famenu() {
+		gameMonsterDTO mon = br.move(mkey);
+		System.out.println(mon.toString1());
+	}
+
 	public String att1() {
 		return br.attMenu(key).toString1();
 	}
+
 	public String att2() {
 		return br.attMenu(key).toString2();
 	}
+
 	public String att3() {
 		return br.attMenu(key).toString3();
+	}
+
+	public void fatt1() {
+		System.out.println("   "+br.attMenu(key).toString1()+"데미지");
+		br.death1(mkey);
+	}
+
+	public void fatt2() {
+		System.out.println("   "+br.attMenu(key).toString2()+"데미지");
+		br.death2(mkey);
+	}
+
+	public void fatt3() {
+		System.out.println("   "+br.attMenu(key).toString3()+"데미지");
+		br.death3(mkey);
 	}
 }

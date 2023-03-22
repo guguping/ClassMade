@@ -31,13 +31,8 @@ public class gameMain {
 				System.out.println("└───────────────────────────────────────┘");
 			}else if(fa == 3) {
 				System.out.println("┌──────────────────전투──────────────────┐");
-				System.out.println("\t"+sr.att1()+"\t\t"+sr.att2()+"   \n\t"+sr.att3()+"\t\t"+"4.뒤로가기");
+				System.out.println("     "+"1."+sr.att1()+"\t   "+"2."+sr.att2()+"   \n     "+"3."+sr.att3()+"\t "+"4.뒤로가기");
 				System.out.println("└───────────────────────────────────────┘");
-				
-//				sr.att2();
-//				sr.att3();
-//				sr.att4();
-//				sr.back();
 			}
 			System.out.print("   메뉴 >");
 			Integer menu = sc.nextInt();
@@ -50,8 +45,11 @@ public class gameMain {
 				} else if (fa == 1) {
 					fa = sr.move();
 				} else if (fa == 2) {
-					System.out.println("실험실입니다");
+					sr.famenu();
 					fa = 3;
+				} else if (fa == 3) {
+					sr.fatt1();
+					sr.famenu();
 				}
 			} else if (menu == 2) {
 				if (Startmenu == null && fa == 0) {
@@ -67,12 +65,18 @@ public class gameMain {
 				} else if( fa == 2) {
 					System.out.println("   겁쟁이");
 					fa = 0;
+				}else if (fa == 3) {
+					sr.famenu();
+					sr.fatt2();
 				}
 			} else if (menu == 3) {
 				if (Startmenu == null && fa == 0) {
 
 				} else if (Startmenu == 1 && fa == 0) {
 //				sr.character();
+				}else if (fa == 3) {
+					sr.famenu();
+					sr.fatt3();
 				}
 			} else if (menu == 4) {
 				if (Startmenu == null && fa == 0) {
