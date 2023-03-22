@@ -39,6 +39,8 @@ public class gameService {
 			key = sc.nextInt();
 			gameCharacterDTO gc = new gameCharacterDTO(key);
 			gameMonsterDTO go = new gameMonsterDTO(key);
+			gameSkillDTO sk = new gameSkillDTO(key);
+			br.newSkill(sk);
 			br.newMonster(go);
 			mkey = go.getmodMon();
 			String oo = br.newGame(gc);
@@ -93,10 +95,20 @@ public class gameService {
 		System.out.println(br.charSee(key));
 	}
 
-	public void move() {
+	public Integer move() {
 		gameMonsterDTO mon = br.move(mkey);
-		System.out.println("   앗! 야생의 "+mon.getMon1()+"이 나타났다!\n");
-		System.out.println(mon.toString1());
-	}
 
+		System.out.println("\n\u001B[31m    \t 앗! 야생의 "+mon.getMon1()+"이 나타났다!\n\u001B[0m");
+		System.out.println(mon.toString1());
+		return 2;
+	}
+	public String att1() {
+		return br.attMenu(key).toString1();
+	}
+	public String att2() {
+		return br.attMenu(key).toString2();
+	}
+	public String att3() {
+		return br.attMenu(key).toString3();
+	}
 }

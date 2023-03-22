@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class gameMonsterDTO {
 	Random rand = new Random();
-	private static int mno = 0;
+//	private static int mno = 0;
 	
 	private String modMon;
 	private String mon1;
@@ -83,14 +83,14 @@ public class gameMonsterDTO {
 		return "   그림자가 "+monmm+"개 보인다";
 	}
 	public String toString1() {
-		return "\t\t이름 :"+mon1+"*"+monmm+"\n\t    체력 :"+(mon1hp*monmm)+"\t공격력"+(mon1att*monmm);
+		return "\t       이름 :"+mon1+"*"+monmm+"\n\t    체력 :"+(mon1hp*monmm)+"\t공격력 :"+(mon1att*monmm);
 	}
-	public static int getMno() {
-		return mno;
-	}
-	public static void setMno(int bno) {
-		mno = bno;
-	}
+//	public static int getMno() {
+//		return mno;
+//	}
+//	public static void setMno(int bno) {
+//		mno = bno;
+//	}
 
 	public String getMon1() {
 		return mon1;

@@ -15,6 +15,7 @@ public class gameRepository {
 
 	Map<Integer, gameCharacterDTO> g = new TreeMap<>();
 	Map<String, gameMonsterDTO> ga = new TreeMap<>();
+	Map<Integer, gameSkillDTO> gs = new TreeMap<>();
 
 	public String newGame(gameCharacterDTO DTO) {
 		if (g.put(DTO.getBno(), DTO) == null) {
@@ -32,6 +33,9 @@ public class gameRepository {
 			}
 		}
 		return false;
+	}
+	public void newSkill(gameSkillDTO STO) {
+		gs.put(STO.getSkillBno() , STO);
 	}
 
 	public String seeMap(String mkey) {
@@ -64,6 +68,14 @@ public class gameRepository {
 		for(String s : ga.keySet()) {
 			if(ga.get(s).getmodMon().equals(mkey)) {
 				return ga.get(s);
+			}
+		}
+		return null;
+	}
+	public gameSkillDTO attMenu(int key) {
+		for(Integer s : gs.keySet()) {
+			if(gs.get(s).getSkillBno() == key) {
+				return gs.get(s);
 			}
 		}
 		return null;
