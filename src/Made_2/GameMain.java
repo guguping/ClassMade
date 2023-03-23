@@ -6,32 +6,46 @@ public class gameMain {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		gameService sr = gameService.getInstance();
 		Integer Startmenu = null;
 		int fa = 0;
-		gameService sr = gameService.getInstance();
+
 		while (true) {
 			if (Startmenu == null || Startmenu == 2) {
 				System.out.println("┌──────────────────넥슨──────────────────┐");
 				System.out.println("\t1.새로하기 2.이어하기 0.종료");
 				System.out.println("└───────────────────────────────────────┘");
-			} else if (Startmenu == 1 && fa == 0) {
-				System.out.println("┌──────────────────던전──────────────────┐");
+			} else if (Startmenu == 1 && fa == 0 && sr.Room() != 3) {
+				System.out.println("\n┌─────────────── 던전" + "(" + sr.Room() + "/3" + ") " + "───────────────┐");
 				System.out.println("     1.살펴보기 2.상태창 3.상점 0.타이틀");
-				System.out.println("└───────────────────────────────────────┘");
+				System.out.println("└────────────────────────────────────────┘");
 			} else if (Startmenu == 2) {
 				System.out.println("gm메뉴 아직 없음");
+			} else if (sr.Room() == 3 && fa == 0) {
+				System.out.println(sr.Room());
+				System.out.println(fa);
+				fa = sr.boss();// 0 or 4
+				if (fa == 4) {
+					System.out.println("\n┌─────────────── 던전" + "(" + sr.boRoom() + "/1" + ") " + "───────────────┐\n");
+					System.out.println("\t    1.도전한다 2.살펴보기 ");
+					System.out.println("\n└────────────────────────────────────────┘");
+				} else if (fa == 0) {
+					System.out.println("   겁쟁이는 필요없어");
+					continue;
+				}
 			}
 			if (fa == 1) {
-				System.out.println("┌──────────────────던전──────────────────┐");
-				System.out.println("\t    1.전진한다 2.정비한다");
+				System.out.println("\n┌─────────────── 던전" + "(" + sr.Room() + "/3" + ") " + "───────────────┐");
+				System.out.println("\t  1.전진한다 2.몰래이동 3.정비한다");
+				System.out.println("└────────────────────────────────────────┘");
+			} else if (fa == 2) {
+				System.out.println("\n┌──────────────" + "HP" + sr.fahp() + "/MP" + sr.famp() + "──────────────┐");
+				System.out.println("\t1.공격" + "(" + sr.faat() + ")" + "\t   2.스킬\n\t3.없어용\t\t   4.도망간다");
 				System.out.println("└───────────────────────────────────────┘");
-			}else if(fa == 2) {
-				System.out.println("┌──────────────────전투──────────────────┐");
-				System.out.println("\t1.공격\t\t   2.도망간다\n\t3.없음\t\t   4.없어용");
-				System.out.println("└───────────────────────────────────────┘");
-			}else if(fa == 3) {
-				System.out.println("┌──────────────────전투──────────────────┐");
-				System.out.println("     "+"1."+sr.att1()+"\t   "+"2."+sr.att2()+"   \n     "+"3."+sr.att3()+"\t "+"4.뒤로가기");
+			} else if (fa == 3) {
+				System.out.println("\n┌──────────────────스킬──────────────────┐");
+				System.out.println("\t" + "1." + sr.att1() + "\t " + "2." + sr.att2() + "   \n\t" + "3." + sr.att3()
+						+ "\t " + "4.뒤로가기");
 				System.out.println("└───────────────────────────────────────┘");
 			}
 			System.out.print("   메뉴 >");
@@ -40,16 +54,33 @@ public class gameMain {
 			if (menu == 1) {
 				if (Startmenu == null && fa == 0) {
 					Startmenu = sr.newgame();
-				} else if (Startmenu == 1 && fa == 0) {
+				} else if (Startmenu == 1 && fa == 0 && sr.Room() != 3) {
 					fa = sr.See();
 				} else if (fa == 1) {
-					fa = sr.move();
+					if (sr.Room() != 3) {
+						fa = sr.move();
+					} else if (sr.Room() == 3) {
+						fa = sr.bomove();
+					}
 				} else if (fa == 2) {
-					sr.famenu();
-					fa = 3;
+					if (sr.Room() != 3) {
+						fa = sr.faatt0();
+					} else if (sr.Room() == 3) {
+						fa = sr.bsatt0();
+					}
+					if (fa != 0) {
+						sr.famenu();
+					}
 				} else if (fa == 3) {
-					sr.fatt1();
-					sr.famenu();
+					fa = sr.fatt1();
+					if (fa != 0) {
+						sr.famenu();
+					}
+					if (sr.Room() != 3) {
+
+					}
+				} else if (fa == 4) {
+					fa = sr.bomove();
 				}
 			} else if (menu == 2) {
 				if (Startmenu == null && fa == 0) {
@@ -61,30 +92,48 @@ public class gameMain {
 				} else if (Startmenu == 1 && fa == 0) {
 					sr.charSee();
 				} else if (fa == 1) {
-					fa = 0;
-				} else if( fa == 2) {
-					System.out.println("   겁쟁이");
-					fa = 0;
-				}else if (fa == 3) {
-					sr.famenu();
-					sr.fatt2();
+					if (sr.hideMove()) {
+						fa = 0;
+					} else {
+						sr.famenu();
+						fa = 2;
+					}
+				} else if (fa == 2) {
+					if (sr.Room() != 3) {
+						sr.famenu();
+						fa = 3;
+					} else {
+						sr.famenu1();
+						fa = 3;
+					}
+				} else if (fa == 3) {
+					fa = sr.fatt2();
+					if (fa != 0) {
+						sr.famenu();
+					}
 				}
 			} else if (menu == 3) {
 				if (Startmenu == null && fa == 0) {
 
 				} else if (Startmenu == 1 && fa == 0) {
 //				sr.character();
-				}else if (fa == 3) {
-					sr.famenu();
-					sr.fatt3();
+				} else if (fa == 1) {
+					fa = 0;
+				} else if (fa == 3) {
+					fa = sr.fatt3();
+					if (fa != 0) {
+						sr.famenu();
+					}
 				}
 			} else if (menu == 4) {
 				if (Startmenu == null && fa == 0) {
 
 				} else if (Startmenu == 1 && fa == 0) {
 //				sr.shop();
-				} else if (fa ==3) {
-					fa=2;
+				} else if (fa == 2) {
+					fa = 0;
+				} else if (fa == 3) {
+					fa = 2;
 				}
 			} else if (menu == 0) {
 				if (Startmenu == null && fa == 0) {
@@ -97,6 +146,6 @@ public class gameMain {
 				System.out.println("어케알았누 ?");
 			}
 		}
-		System.out.println("시스템을 종료합니다");
+		System.out.println("   시스템을 종료합니다");
 	}
 }

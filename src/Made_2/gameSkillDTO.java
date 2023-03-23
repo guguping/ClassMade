@@ -15,7 +15,7 @@ public class gameSkillDTO {
 	int skilld3;
 
 	public gameSkillDTO(Integer key , gameCharacterDTO gc) {
-		String[] Skill = { "좌종", "스네이크", "우종", "붕권", "월광섬", "도발", "도발제트어퍼", "초풍", "초오찌" };
+		String[] Skill = { "좌종", "스네", "우종", "붕권", "월광", "도발", "도제", "초풍", };
 		if (key == 1) {
 			skillBno = 1;
 			this.skilld1 = 10 + rand.nextInt(21)+gc.getAtt();

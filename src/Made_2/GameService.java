@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class gameService {
 	gameRepository br = gameRepository.getInstance();
 	private static gameService sr = new gameService();
+	double probability = Math.random();
 
 	private gameService() {
 	}
@@ -16,6 +17,9 @@ public class gameService {
 	int key = 0;
 	int mkey = 0;
 	int strkey = 0;
+	int clkey = 0;
+	int blkey = 0;
+	int bokey = 0;
 
 	public Integer newgame() {
 		Scanner sc = new Scanner(System.in);
@@ -92,22 +96,33 @@ public class gameService {
 	}
 
 	public void charSee() {
-		System.out.println(br.charSee(key));
+		System.out.println(br.charSee(key).toString());
 	}
 
 	public Integer move() {
 		gameMonsterDTO mon = br.move(mkey);
-
-		System.out.println("\n\u001B[31m    \t 앗! 야생의 " + mon.getMon1() + "이 나타났다!\n\u001B[0m");
+		System.out.println("\n┌──────────────────경고──────────────────┐");
+		System.out.println("\n\u001B[31m    \t 앗! 던전의 " + mon.getMon1() + "이 나타났다!\n\u001B[0m");
+		System.out.println("└───────────────────────────────────────┘\n");
 		System.out.println(mon.toString1());
 		return 2;
 	}
-
+	public Integer bomove() {
+		gameMonsterDTO mon = br.bomove(mkey);
+		System.out.println("\n┌──────────────────경고──────────────────┐");
+		System.out.println("\n\u001B[31m    \t앗! 던전의 " + mon.getBoss() + "이 나타났다!\n\u001B[0m");
+		System.out.println("└───────────────────────────────────────┘\n");
+		System.out.println(mon.toString2());
+		return 2;
+	}
 	public void famenu() {
 		gameMonsterDTO mon = br.move(mkey);
 		System.out.println(mon.toString1());
 	}
-
+	public void famenu1() {
+		gameMonsterDTO mon = br.bomove(mkey);
+		System.out.println(mon.toString2());
+	}
 	public String att1() {
 		return br.attMenu(key).toString1();
 	}
@@ -120,18 +135,138 @@ public class gameService {
 		return br.attMenu(key).toString3();
 	}
 
-	public void fatt1() {
-		System.out.println("   "+br.attMenu(key).toString1()+"데미지");
-		br.death1(mkey);
+	public int faatt0() {
+		System.out.println("\n┌──────────────────전투──────────────────┐");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 공격(" + br.charSee(key).getAtt() + ")" + "데미지");
+		System.out.println("\t    " + br.move(mkey).getMon1() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
+		System.out.println("└───────────────────────────────────────┘\n");
+		if (br.death0(mkey)) {
+			System.out.println("\n┌──────────────────생존──────────────────┐\n");
+			clkey = br.dcheak(key);
+			System.out.println("\n└───────────────────────────────────────┘\n");
+			gameMonsterDTO MTO = new gameMonsterDTO(key);
+			br.newMonster(MTO);
+			return 0;
+		}
+		return 2;
+	}
+	public int bsatt0() {
+		System.out.println("\n┌──────────────────전투──────────────────┐");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 공격(" + br.charSee(key).getAtt() + ")" + "데미지");
+		System.out.println("\t  " + br.move(mkey).getBoss() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
+		System.out.println("└───────────────────────────────────────┘\n");
+		if (br.bsdeath0(mkey)) {
+			System.out.println("┌──────────────────생존──────────────────┐\n");
+			blkey = br.bsdcheak(mkey);
+			System.out.println("\n└───────────────────────────────────────┘\n");
+//			gameMonsterDTO MTO = new gameMonsterDTO(key);
+//			br.newMonster(MTO);
+			return 0;
+		}
+		return 2;
 	}
 
-	public void fatt2() {
-		System.out.println("   "+br.attMenu(key).toString2()+"데미지");
-		br.death2(mkey);
+	public int fatt1() {
+		System.out.println("\n┌──────────────────전투──────────────────┐");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.attMenu(key).toString1() + "데미지");
+		System.out.println("\t    " + br.move(mkey).getMon1() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
+		System.out.println("└───────────────────────────────────────┘\n");
+		if (br.death1(mkey)) {
+			System.out.println("\n┌──────────────────생존──────────────────┐\n");
+			clkey = br.dcheak(key);
+			System.out.println("\n└───────────────────────────────────────┘\n");
+			gameMonsterDTO MTO = new gameMonsterDTO(key);
+			br.newMonster(MTO);
+			return 0;
+		}
+		return 2;
 	}
 
-	public void fatt3() {
-		System.out.println("   "+br.attMenu(key).toString3()+"데미지");
-		br.death3(mkey);
+	public int fatt2() {
+		System.out.println("\n┌──────────────────전투──────────────────┐");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.attMenu(key).toString2() + "데미지");
+		System.out.println("\t    " + br.move(mkey).getMon1() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
+		System.out.println("└───────────────────────────────────────┘\n");
+		if (br.death2(mkey)) {
+			System.out.println("\n┌──────────────────생존──────────────────┐\n");
+			clkey = br.dcheak(key);
+			System.out.println("\n└───────────────────────────────────────┘\n");
+			gameMonsterDTO MTO = new gameMonsterDTO(key);
+			br.newMonster(MTO);
+			return 0;
+		}
+		return 2;
+	}
+
+	public int fatt3() {
+		System.out.println("\n┌──────────────────전투──────────────────┐");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.attMenu(key).toString3() + "데미지");
+		System.out.println("\t    " + br.move(mkey).getMon1() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
+		System.out.println("└───────────────────────────────────────┘\n");
+		if (br.death3(mkey)) {
+			System.out.println("\n┌──────────────────생존──────────────────┐\n");
+			clkey = br.dcheak(key);
+			System.out.println("\n└───────────────────────────────────────┘\n");
+			gameMonsterDTO MTO = new gameMonsterDTO(key);
+			br.newMonster(MTO);
+			return 0;
+		}
+		return 2;
+	}
+	public int faat() {
+		return br.charSee(key).getAtt();
+	}
+
+	public int fahp() {
+		return br.charSee(key).getHp();
+	}
+
+	public int famp() {
+		return br.charSee(key).getMp();
+	}
+
+	public int Room() {
+		return br.Room(key).getRoom();
+	}
+	public int boRoom() {
+		return br.boRoom(key).getBossroom();
+	}
+
+	public int boss() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\n\u001B[31m┌──────────────────경고──────────────────┐\u001B[0m\n");
+		System.out.println("\t    이앞은 보스방입니다\n\t 진입시 정비할 수 없습니다\n\t   진입하시겠습니까?(Y/N)");
+		System.out.println("\n\u001B[31m└───────────────────────────────────────┘\u001B[0m\n");
+		while (true) {
+		System.out.print("   메뉴 >");
+		String bome = sc.next();
+			if (bome.equals("y") || bome.equals("Y")) {
+				return 4;
+			} else if (bome.equals("n") || bome.equals("N")) {
+				clkey = br.boss(clkey, mkey);
+				return 0;
+			} else {
+				continue;
+			}
+		}
+
+	}
+
+	public boolean hideMove() {
+		if (probability < br.hide(key)) {
+			System.out.println("\n┌──────────────────행운──────────────────┐\n");
+			clkey = br.dcheak(key);
+			System.out.println("\n\t     세상에 운이 좋은걸?\n");
+			System.out.println("└───────────────────────────────────────┘\n");
+			gameMonsterDTO MTO = new gameMonsterDTO(key);
+			br.newMonster(MTO);
+			return true;
+		} else {
+			System.out.println("\n┌──────────────────경고──────────────────┐");
+			System.out.println("\n\u001B[31m\t\t   앗! " + br.move(mkey).getMon1() + "에게 기습당했다\n\t\t  " + br.monAtt(key)
+					+ "데미지\u001B[0m\n");
+			System.out.println("└───────────────────────────────────────┘\n");
+			return false;
+		}
 	}
 }

@@ -20,15 +20,17 @@ public class gameMonsterDTO {
 	private int monexp;
 	private int monmm;
 	private int bmonmm;
+	private static int room = 0;
+	private static int bossroom = 0;
 
 	public gameMonsterDTO() {}
 	public gameMonsterDTO(Integer key) {
-		String[] bossname = { "샌드", "아이언", "스톤" + "골렘" };
+		String[] bossname = { "샌드 골렘", "아이언 골렘", "스톤 골렘" };
 		if (key == 1) {
 			this.modMon = 1;
-			String[] raname = { "슬라임", "고블린", "타우렌", "골렘" };
+			String[] raname = { "슬라임", "고블린", "타우렌" };
 			this.mon1 = raname[rand.nextInt(raname.length)];
-			this.mon1hp = 1 + rand.nextInt(5);
+			this.mon1hp = 400 + rand.nextInt(5);
 			this.mon1att = 1 + rand.nextInt(5);
 			this.mon1arm = 1 + rand.nextInt(5);
 			this.mon1hid = 1 + rand.nextInt(5);
@@ -43,7 +45,7 @@ public class gameMonsterDTO {
 			this.bmonmm = 1;
 		}else if(key==2) {
 			this.modMon = 2;
-			String[] raname = { "큰 슬라임", "홉 고블린", "큰 타우렌", "스톤 골렘" };
+			String[] raname = { "큰 슬라임", "홉 고블린", "큰 타우렌" };
 			this.mon1 = raname[rand.nextInt(raname.length)];
 			this.mon1hp = 2 + rand.nextInt(6);
 			this.mon1att = 2 + rand.nextInt(6);
@@ -60,7 +62,7 @@ public class gameMonsterDTO {
 			this.bmonmm = 1;
 		}else if(key==3) {
 			this.modMon = 3;
-			String[] raname = { "슬라임 킹", "고블린 킹", "타우렌 킹", "아이언 골렘" };
+			String[] raname = { "슬라임 킹", "고블린 킹", "타우렌 킹" };
 			this.mon1 = raname[rand.nextInt(raname.length)];
 			this.mon1hp = 4 + rand.nextInt(11);
 			this.mon1att = 4 + rand.nextInt(11);
@@ -82,8 +84,23 @@ public class gameMonsterDTO {
 	public String toString() {
 		return "   그림자가 "+monmm+"개 보인다";
 	}
+	public int getBmonmm() {
+		return bmonmm;
+	}
+	public void setBmonmm(int bmonmm) {
+		this.bmonmm = bmonmm;
+	}
 	public String toString1() {
-		return "\t       이름 :"+mon1+"*"+monmm+"\n\t    체력 :"+(mon1hp*monmm)+"\t공격력 :"+(mon1att*monmm);
+		return "\t       이름 :"+mon1+"*"+monmm+"\n\t    체력 :"+(mon1hp)+"\t공격력 :"+(mon1att);
+	}
+	public String toString2() {
+		return "\t     이름 :"+boss+"*"+bmonmm+"\n\t   체력 :"+(bosshp)+"\t공격력 :"+(bossatt);
+	}
+	public static int getBossroom() {
+		return bossroom;
+	}
+	public static void setBossroom(int bossroom) {
+		gameMonsterDTO.bossroom = bossroom;
 	}
 	public String getMon1() {
 		return mon1;
@@ -160,5 +177,14 @@ public class gameMonsterDTO {
 	public int getmodMon() {
 		return modMon;
 	}
-
+	public int getRoom() {
+		return room;
+	}
+	public void setRoom(int room) {
+		this.room = room;
+	}
+	public void setmodMon(int modMon) {
+		this.modMon = modMon;
+	}
+	
 }

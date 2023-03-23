@@ -14,7 +14,7 @@ public class gameCharacterDTO {
 	private int lnt;
 	private int luk;
 	private int att;
-	private int acc;
+	private int arm;
 	private int hp;
 	private int mp;
 	private String name = "";
@@ -30,13 +30,16 @@ public class gameCharacterDTO {
 		this.bno = key;
 		String[] raname = { "제임스" , "나루토" , "사스케" , "포치타" ,"이은수"};
 		this.joinDate = DTF.format(LocalDateTime.now());
+		this.name = raname[rand.nextInt(raname.length)];
+		this.hp = str * 2 + 100;
+		this.mp = lnt * 3 + 100;
 		if (key == 1) {
 			this.str = 10 + rand.nextInt(21);
 			this.dex = 10 + rand.nextInt(21);
 			this.lnt = 10 + rand.nextInt(21);
 			this.luk = 10 + rand.nextInt(21);
 			this.att = str + 10;
-			this.acc = (dex / 2) + 10;
+			this.arm = (dex / 2) + 10;
 		} else if (key == 2) {
 			this.str = 5 + rand.nextInt(11);
 			this.dex = 5 + rand.nextInt(11);
@@ -49,11 +52,16 @@ public class gameCharacterDTO {
 			this.lnt = 1;
 			this.luk = 1;
 			this.att = str + 1;
-			this.acc = (dex / 2) + 1;
+			this.arm = (dex / 2) + 1;
 		}
-		this.name = raname[rand.nextInt(raname.length)];
-		this.hp = str * 2 + 100;
-		this.mp = lnt * 3 + 100;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getBno() {
@@ -100,12 +108,12 @@ public class gameCharacterDTO {
 		this.att = att;
 	}
 
-	public double getAcc() {
-		return acc;
+	public double getarm() {
+		return arm;
 	}
 
-	public void setAcc(double acc) {
-		this.acc = (int) acc;
+	public void setarm(double acc) {
+		this.arm = (int) acc;
 	}
 
 	public int getHp() {
@@ -134,8 +142,8 @@ public class gameCharacterDTO {
 	@Override
 	public String toString() {
 
-		return "┌─────────────" + name + "의 상태창─────────────┐\n" + "\t\t\t\t\n\t공격력: " + att + "\t명중률: " + acc
-				+ "\n\n\t체력: " + hp + "\t마나: " + mp + "\n\n\t이름: " + name + "     생일: " + joinDate + "\n\n   str: "
+		return "\n┌───────────── " + name + "의 상태창 ─────────────┐\n" + "\t\t\t\t\n\t공격력: " + att + "\t방어력: " + arm
+				+ "\n\n\t체력: " + hp + "\t\t마나: " + mp + "\n\n\t이름: " + name + "     생일: " + joinDate + "\n\n   str: "
 				+ str + "   dex: " + dex + "   lnt: " + lnt + "   luk: " + luk + "\n└───────────────────" + bno
 				+ "───────────────────┘";
 	}
