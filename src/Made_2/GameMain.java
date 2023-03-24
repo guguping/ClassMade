@@ -22,11 +22,10 @@ public class gameMain {
 			} else if (Startmenu == 2) {
 				System.out.println("gm메뉴 아직 없음");
 			} else if (sr.Room() == 3 && fa == 0) {
-				System.out.println(sr.Room());
-				System.out.println(fa);
 				fa = sr.boss();// 0 or 4
 				if (fa == 4) {
-					System.out.println("\n┌─────────────── 던전" + "(" + sr.boRoom() + "/1" + ") " + "───────────────┐\n");
+					System.out
+							.println("\n┌─────────────── 던전" + "(" + sr.boRoom() + "/1" + ") " + "───────────────┐\n");
 					System.out.println("\t    1.도전한다 2.살펴보기 ");
 					System.out.println("\n└────────────────────────────────────────┘");
 				} else if (fa == 0) {
@@ -68,16 +67,23 @@ public class gameMain {
 					} else if (sr.Room() == 3) {
 						fa = sr.bsatt0();
 					}
-					if (fa != 0) {
+					if (fa != 0 && sr.Room() != 3) {
 						sr.famenu();
+					}
+					if (fa != 0 && sr.Room() == 3) {
+							sr.famenu1();
 					}
 				} else if (fa == 3) {
-					fa = sr.fatt1();
-					if (fa != 0) {
+					if (sr.Room() != 3) {// 일반몹 스킬
+						fa = sr.fatt1();
+					} else {// 보스몹 스킬
+						fa = sr.bsatt1();
+					}
+					if (fa != 0 && sr.Room() != 3) { // 일반몹 스킬 데미지
 						sr.famenu();
 					}
-					if (sr.Room() != 3) {
-
+					if (fa != 0 && sr.Room() == 3) {// 보스몹 스킬 데미지
+						sr.famenu1();
 					}
 				} else if (fa == 4) {
 					fa = sr.bomove();
@@ -99,35 +105,50 @@ public class gameMain {
 						fa = 2;
 					}
 				} else if (fa == 2) {
-					if (sr.Room() != 3) {
+					if (fa != 0 && sr.Room() != 3) {
 						sr.famenu();
 						fa = 3;
-					} else {
+					}
+					if (fa != 0 && sr.Room() == 3) {
 						sr.famenu1();
 						fa = 3;
 					}
 				} else if (fa == 3) {
-					fa = sr.fatt2();
-					if (fa != 0) {
+					if (sr.Room() != 3) {// 일반몹 스킬
+						fa = sr.fatt2();
+					} else {// 보스몹 스킬
+						fa = sr.bsatt2();
+					}
+					if (fa != 0 && sr.Room() != 3) { // 일반몹 스킬 데미지
 						sr.famenu();
+					}
+					if (fa != 0 && sr.Room() == 3) {// 보스몹 스킬 데미지
+						sr.famenu1();
 					}
 				}
 			} else if (menu == 3) {
 				if (Startmenu == null && fa == 0) {
-
+//				
 				} else if (Startmenu == 1 && fa == 0) {
-//				sr.character();
+//				
 				} else if (fa == 1) {
 					fa = 0;
 				} else if (fa == 3) {
-					fa = sr.fatt3();
-					if (fa != 0) {
+					if (sr.Room() != 3) {
+						fa = sr.fatt3();
+					} else if (sr.Room() == 3) {
+						fa = sr.bsatt3();
+					}
+					if (fa != 0 && sr.Room() != 3) {
 						sr.famenu();
+					}
+					if (fa != 0 && sr.Room() == 3) {
+						sr.famenu1();
 					}
 				}
 			} else if (menu == 4) {
 				if (Startmenu == null && fa == 0) {
-
+//					sr.아직없음
 				} else if (Startmenu == 1 && fa == 0) {
 //				sr.shop();
 				} else if (fa == 2) {

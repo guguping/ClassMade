@@ -55,7 +55,7 @@ public class gameMonsterDTO {
 			this.monmm = 1 + rand.nextInt(3);
 			this.boss = bossname[rand.nextInt(bossname.length)];
 			this.bosshp = 7 + rand.nextInt(8);
-			this.bossatt = 7 + rand.nextInt(8);
+			this.bossatt = 50 + rand.nextInt(8);
 			this.bossarm = 7 + rand.nextInt(8);
 			this.bosshid = 7 + rand.nextInt(8);
 			this.monexp = 7 + rand.nextInt(8);

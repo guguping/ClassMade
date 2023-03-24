@@ -17,6 +17,9 @@ public class gameCharacterDTO {
 	private int arm;
 	private int hp;
 	private int mp;
+	private long startTime;
+	private long endTime;
+	private long elapsedTime;
 	private String name = "";
 	private String joinDate;
 
@@ -28,32 +31,52 @@ public class gameCharacterDTO {
 
 	public gameCharacterDTO(Integer key) {
 		this.bno = key;
-		String[] raname = { "제임스" , "나루토" , "사스케" , "포치타" ,"이은수"};
+		String[] raname = { "제임스", "나루토", "사스케", "포치타", "이은수" };
 		this.joinDate = DTF.format(LocalDateTime.now());
 		this.name = raname[rand.nextInt(raname.length)];
-		this.hp = str * 2 + 100;
-		this.mp = lnt * 3 + 100;
 		if (key == 1) {
 			this.str = 10 + rand.nextInt(21);
 			this.dex = 10 + rand.nextInt(21);
 			this.lnt = 10 + rand.nextInt(21);
 			this.luk = 10 + rand.nextInt(21);
 			this.att = str + 10;
-			this.arm = (dex / 2) + 10;
+			this.arm = 10 + (dex / 2);
 		} else if (key == 2) {
 			this.str = 5 + rand.nextInt(11);
 			this.dex = 5 + rand.nextInt(11);
 			this.lnt = 5 + rand.nextInt(11);
 			this.luk = 5 + rand.nextInt(11);
 			this.att = str + 5;
+			this.arm = 5 + (dex / 2);
 		} else if (key == 3) {
 			this.str = 1;
 			this.dex = 1;
 			this.lnt = 1;
 			this.luk = 1;
 			this.att = str + 1;
-			this.arm = (dex / 2) + 1;
+			this.arm = 1 + (dex / 2);
 		}
+		this.hp = 100 + (str * 2);
+		this.mp = 100 + (lnt * 3);
+	}
+
+	public void start() {
+		startTime = System.currentTimeMillis();
+		// 게임 시작 코드
+	}
+
+	public void end() {
+		endTime = System.currentTimeMillis();
+		// 게임 종료 코드
+		this.elapsedTime = endTime - startTime;
+	}
+
+	public long getElapsedTime() {
+		return elapsedTime;
+	}
+
+	public void setElapsedTime(long elapsedTime) {
+		this.elapsedTime = elapsedTime;
 	}
 
 	public String getName() {
@@ -139,6 +162,7 @@ public class gameCharacterDTO {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
+
 	@Override
 	public String toString() {
 

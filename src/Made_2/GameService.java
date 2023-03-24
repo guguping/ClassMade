@@ -44,6 +44,7 @@ public class gameService {
 			gameCharacterDTO gc = new gameCharacterDTO(key);
 			gameMonsterDTO go = new gameMonsterDTO(key);
 			gameSkillDTO sk = new gameSkillDTO(key, gc);
+			br.gameStart(key);
 			br.newSkill(sk);
 			br.newMonster(go);
 			mkey = go.getmodMon();
@@ -122,6 +123,7 @@ public class gameService {
 	public void famenu1() {
 		gameMonsterDTO mon = br.bomove(mkey);
 		System.out.println(mon.toString2());
+
 	}
 	public String att1() {
 		return br.attMenu(key).toString1();
@@ -135,9 +137,9 @@ public class gameService {
 		return br.attMenu(key).toString3();
 	}
 
-	public int faatt0() {
+	public int faatt0() { // 몬스터를 평타로
 		System.out.println("\n┌──────────────────전투──────────────────┐");
-		System.out.println("\n\t    " + br.charSee(key).getName() + "의 공격(" + br.charSee(key).getAtt() + ")" + "데미지");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 공격(" + br.umoatt(key) + ")" + "데미지");
 		System.out.println("\t    " + br.move(mkey).getMon1() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
 		System.out.println("└───────────────────────────────────────┘\n");
 		if (br.death0(mkey)) {
@@ -150,28 +152,34 @@ public class gameService {
 		}
 		return 2;
 	}
-	public int bsatt0() {
+	public int bsatt0() { // 보스를 평타로
 		System.out.println("\n┌──────────────────전투──────────────────┐");
-		System.out.println("\n\t    " + br.charSee(key).getName() + "의 공격(" + br.charSee(key).getAtt() + ")" + "데미지");
-		System.out.println("\t  " + br.move(mkey).getBoss() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 공격(" + br.ubsatt(key) + ")" + "데미지");
+		System.out.println("\t  " + br.move(mkey).getBoss() + "의 반격(" + br.bosAtt(key) + ")" + "데미지\n");
 		System.out.println("└───────────────────────────────────────┘\n");
 		if (br.bsdeath0(mkey)) {
-			System.out.println("┌──────────────────생존──────────────────┐\n");
-			blkey = br.bsdcheak(mkey);
+			System.out.println("┌──────────────────클리어─────────────────┐\n");
+			br.gameEnd(key).end();
+			System.out.println("축하합니다\n클리어 타임 :"+br.gameEnd(key).getElapsedTime());
+//			blkey = br.bsdcheak(mkey);
 			System.out.println("\n└───────────────────────────────────────┘\n");
-//			gameMonsterDTO MTO = new gameMonsterDTO(key);
-//			br.newMonster(MTO);
-			return 0;
+			return 5;
+		}
+		if(br.charSee(key).getHp() <= 0) {
+			if(key != 3) {
+				System.out.println("개약하넹");
+				return 0;
+			}
 		}
 		return 2;
 	}
 
-	public int fatt1() {
+	public int fatt1() { // 스킬1 이름 추가필요
 		System.out.println("\n┌──────────────────전투──────────────────┐");
-		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.attMenu(key).toString1() + "데미지");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.umostt1(key) + "데미지");
 		System.out.println("\t    " + br.move(mkey).getMon1() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
 		System.out.println("└───────────────────────────────────────┘\n");
-		if (br.death1(mkey)) {
+		if (br.death1(mkey , br.umostt1(key))) {
 			System.out.println("\n┌──────────────────생존──────────────────┐\n");
 			clkey = br.dcheak(key);
 			System.out.println("\n└───────────────────────────────────────┘\n");
@@ -181,13 +189,32 @@ public class gameService {
 		}
 		return 2;
 	}
-
-	public int fatt2() {
+	public int bsatt1() {// 보스 스킬1 이름 추가필요
 		System.out.println("\n┌──────────────────전투──────────────────┐");
-		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.attMenu(key).toString2() + "데미지");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.ubostt1(key) + "데미지");
+		System.out.println("\t  " + br.move(mkey).getBoss() + "의 반격(" + br.bosAtt(key) + ")" + "데미지\n");
+		System.out.println("└───────────────────────────────────────┘\n");
+		if (br.bsdeath1(mkey, br.ubostt1(key))) {
+			System.out.println("┌──────────────────클리어─────────────────┐\n");
+			br.gameEnd(key).end();
+			System.out.println("축하합니다\n클리어 타임 :"+br.gameEnd(key).getElapsedTime());
+			System.out.println("\n└───────────────────────────────────────┘\n");
+			return 5;
+		}
+		if(br.charSee(key).getHp() <= 0) {
+			if(key != 3) {
+				System.out.println("개약하넹");
+				return 0;
+			}
+		}
+		return 2;
+	}
+	public int fatt2() {// 스킬2 이름 추가필요
+		System.out.println("\n┌──────────────────전투──────────────────┐");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.umostt2(key) + "데미지");
 		System.out.println("\t    " + br.move(mkey).getMon1() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
 		System.out.println("└───────────────────────────────────────┘\n");
-		if (br.death2(mkey)) {
+		if (br.death2(mkey, br.umostt2(key))) {
 			System.out.println("\n┌──────────────────생존──────────────────┐\n");
 			clkey = br.dcheak(key);
 			System.out.println("\n└───────────────────────────────────────┘\n");
@@ -197,19 +224,58 @@ public class gameService {
 		}
 		return 2;
 	}
-
-	public int fatt3() {
+	public int bsatt2() {// 보스 스킬2 이름 추가필요
 		System.out.println("\n┌──────────────────전투──────────────────┐");
-		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.attMenu(key).toString3() + "데미지");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.ubostt2(key) + "데미지");
+		System.out.println("\t  " + br.move(mkey).getBoss() + "의 반격(" + br.bosAtt(key) + ")" + "데미지\n");
+		System.out.println("└───────────────────────────────────────┘\n");
+		if (br.bsdeath2(mkey,br.ubostt2(key))) {
+			System.out.println("┌──────────────────클리어─────────────────┐\n");
+			br.gameEnd(key).end();
+			System.out.println("축하합니다\n클리어 타임 :"+br.gameEnd(key).getElapsedTime());
+			System.out.println("\n└───────────────────────────────────────┘\n");
+			return 5;
+		}
+		if(br.charSee(key).getHp() <= 0) {
+			if(key != 3) {
+				System.out.println("개약하넹");
+				return 0;
+			}
+		}
+		return 2;
+	}
+	public int fatt3() {// 스킬3 이름 추가필요
+		System.out.println("\n┌──────────────────전투──────────────────┐");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.umostt3(key) + "데미지");
 		System.out.println("\t    " + br.move(mkey).getMon1() + "의 반격(" + br.monAtt(key) + ")" + "데미지\n");
 		System.out.println("└───────────────────────────────────────┘\n");
-		if (br.death3(mkey)) {
+		if (br.death3(mkey, br.umostt3(key))) {
 			System.out.println("\n┌──────────────────생존──────────────────┐\n");
 			clkey = br.dcheak(key);
 			System.out.println("\n└───────────────────────────────────────┘\n");
 			gameMonsterDTO MTO = new gameMonsterDTO(key);
 			br.newMonster(MTO);
 			return 0;
+		}
+		return 2;
+	}
+	public int bsatt3() {// 보스 스킬3 이름 추가필요
+		System.out.println("\n┌──────────────────전투──────────────────┐");
+		System.out.println("\n\t    " + br.charSee(key).getName() + "의 " + br.ubostt3(key) + "데미지");
+		System.out.println("\t  " + br.move(mkey).getBoss() + "의 반격(" + br.bosAtt(key) + ")" + "데미지\n");
+		System.out.println("└───────────────────────────────────────┘\n");
+		if (br.bsdeath3(mkey,br.ubostt3(key))) {
+			System.out.println("┌──────────────────클리어─────────────────┐\n");
+			br.gameEnd(key).end();
+			System.out.println("축하합니다\n클리어 타임 :"+br.gameEnd(key).getElapsedTime());
+			System.out.println("\n└───────────────────────────────────────┘\n");
+			return 5;
+		}
+		if(br.charSee(key).getHp() <= 0) {
+			if(key != 3) {
+				System.out.println("개약하넹");
+				return 0;
+			}
 		}
 		return 2;
 	}

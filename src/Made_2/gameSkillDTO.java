@@ -45,9 +45,6 @@ public class gameSkillDTO {
 	public String toString3() {
 		return menu3;
 	}
-	public String toString4() {
-		return menu4;
-	}
 	public int getSkillBno() {
 		return skillBno;
 	}
