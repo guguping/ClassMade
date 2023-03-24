@@ -31,7 +31,7 @@ public class gameMonsterDTO {
 			String[] raname = { "슬라임", "고블린", "타우렌" };
 			this.mon1 = raname[rand.nextInt(raname.length)];
 			this.mon1hp = 400 + rand.nextInt(5);
-			this.mon1att = 1 + rand.nextInt(5);
+			this.mon1att = 30 + rand.nextInt(5);
 			this.mon1arm = 1 + rand.nextInt(5);
 			this.mon1hid = 1 + rand.nextInt(5);
 			this.monexp = 1 + rand.nextInt(5);

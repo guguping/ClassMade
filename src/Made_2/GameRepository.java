@@ -290,7 +290,7 @@ public class gameRepository {
 //		return 0;
 //	}
 
-	public int monAtt(int key) { // 몬스터가 반반격
+	public int monAtt(int key) { // 몬스터가 반격
 		int monatt;
 		for (Integer s : ga.keySet()) {
 			if (ga.get(s).getmodMon() == key) {

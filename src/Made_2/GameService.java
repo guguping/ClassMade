@@ -150,6 +150,13 @@ public class gameService {
 			br.newMonster(MTO);
 			return 0;
 		}
+		if(br.charSee(key).getHp() <= 0) {
+			if(key != 3) {
+				System.out.println("개약하넹");
+				br.charSee(key).setHp(1);
+				return 0;
+			}
+		}
 		return 2;
 	}
 	public int bsatt0() { // 보스를 평타로
@@ -163,11 +170,12 @@ public class gameService {
 			System.out.println("축하합니다\n클리어 타임 :"+br.gameEnd(key).getElapsedTime());
 //			blkey = br.bsdcheak(mkey);
 			System.out.println("\n└───────────────────────────────────────┘\n");
-			return 5;
+			return 0;
 		}
 		if(br.charSee(key).getHp() <= 0) {
 			if(key != 3) {
 				System.out.println("개약하넹");
+				br.charSee(key).setHp(1);
 				return 0;
 			}
 		}
@@ -187,6 +195,13 @@ public class gameService {
 			br.newMonster(MTO);
 			return 0;
 		}
+		if(br.charSee(key).getHp() <= 0) {
+			if(key != 3) {
+				System.out.println("개약하넹");
+				br.charSee(key).setHp(1);
+				return 0;
+			}
+		}
 		return 2;
 	}
 	public int bsatt1() {// 보스 스킬1 이름 추가필요
@@ -204,6 +219,7 @@ public class gameService {
 		if(br.charSee(key).getHp() <= 0) {
 			if(key != 3) {
 				System.out.println("개약하넹");
+				br.charSee(key).setHp(1);
 				return 0;
 			}
 		}
@@ -222,6 +238,13 @@ public class gameService {
 			br.newMonster(MTO);
 			return 0;
 		}
+		if(br.charSee(key).getHp() <= 0) {
+			if(key != 3) {
+				System.out.println("개약하넹");
+				br.charSee(key).setHp(1);
+				return 0;
+			}
+		}
 		return 2;
 	}
 	public int bsatt2() {// 보스 스킬2 이름 추가필요
@@ -239,6 +262,7 @@ public class gameService {
 		if(br.charSee(key).getHp() <= 0) {
 			if(key != 3) {
 				System.out.println("개약하넹");
+				br.charSee(key).setHp(1);
 				return 0;
 			}
 		}
@@ -257,6 +281,13 @@ public class gameService {
 			br.newMonster(MTO);
 			return 0;
 		}
+		if(br.charSee(key).getHp() <= 0) {
+			if(key != 3) {
+				System.out.println("개약하넹");
+				br.charSee(key).setHp(1);
+				return 0;
+			}
+		}
 		return 2;
 	}
 	public int bsatt3() {// 보스 스킬3 이름 추가필요
@@ -269,11 +300,12 @@ public class gameService {
 			br.gameEnd(key).end();
 			System.out.println("축하합니다\n클리어 타임 :"+br.gameEnd(key).getElapsedTime());
 			System.out.println("\n└───────────────────────────────────────┘\n");
-			return 5;
+			return 0;
 		}
 		if(br.charSee(key).getHp() <= 0) {
 			if(key != 3) {
 				System.out.println("개약하넹");
+				br.charSee(key).setHp(1);
 				return 0;
 			}
 		}

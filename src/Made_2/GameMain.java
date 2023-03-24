@@ -64,7 +64,7 @@ public class gameMain {
 				} else if (fa == 2) {
 					if (sr.Room() != 3) {
 						fa = sr.faatt0();
-					} else if (sr.Room() == 3) {
+					} else if (sr.Room() == 3) { /////// 조건 수정 필요
 						fa = sr.bsatt0();
 					}
 					if (fa != 0 && sr.Room() != 3) {
@@ -138,6 +138,9 @@ public class gameMain {
 						fa = sr.fatt3();
 					} else if (sr.Room() == 3) {
 						fa = sr.bsatt3();
+						if(fa == 0) {
+							
+						}
 					}
 					if (fa != 0 && sr.Room() != 3) {
 						sr.famenu();
