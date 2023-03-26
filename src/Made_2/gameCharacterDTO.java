@@ -17,6 +17,7 @@ public class gameCharacterDTO {
 	private int arm;
 	private int hp;
 	private int mp;
+	private int money;
 	private long startTime;
 	private long endTime;
 	private long elapsedTime;
@@ -24,9 +25,6 @@ public class gameCharacterDTO {
 	private String joinDate;
 
 	public gameCharacterDTO() {
-		Random rand = new Random();
-		this.name = "";
-
 	}
 
 	public gameCharacterDTO(Integer key) {
@@ -38,9 +36,10 @@ public class gameCharacterDTO {
 			this.str = 10 + rand.nextInt(21);
 			this.dex = 10 + rand.nextInt(21);
 			this.lnt = 10 + rand.nextInt(21);
-			this.luk = 10 + rand.nextInt(21);
+			this.luk = 100 + rand.nextInt(21);
 			this.att = str + 10;
 			this.arm = 10 + (dex / 2);
+			this.money = 10;
 		} else if (key == 2) {
 			this.str = 5 + rand.nextInt(11);
 			this.dex = 5 + rand.nextInt(11);
@@ -48,13 +47,15 @@ public class gameCharacterDTO {
 			this.luk = 5 + rand.nextInt(11);
 			this.att = str + 5;
 			this.arm = 5 + (dex / 2);
+			this.money = 100;
 		} else if (key == 3) {
-			this.str = 1;
-			this.dex = 1;
-			this.lnt = 1;
-			this.luk = 1;
+			this.str = 1 + rand.nextInt(6);
+			this.dex = 1 + rand.nextInt(6);
+			this.lnt = 1 + rand.nextInt(6);
+			this.luk = 1 + rand.nextInt(6);
 			this.att = str + 1;
 			this.arm = 1 + (dex / 2);
+			this.money = 1000;
 		}
 		this.hp = 100 + (str * 2);
 		this.mp = 100 + (lnt * 3);
@@ -95,16 +96,31 @@ public class gameCharacterDTO {
 		return (int) str;
 	}
 
-	public void setStr(int str) {
+	public void setStr(int str, int key) {
 		this.str = str;
+		if (key == 1) {
+			this.att = this.str + 10;
+		} else if (key == 2) {
+			this.att = this.str + 5;
+		} else if (key == 3) {
+			this.att = this.str + 1;
+		}
+		this.hp = 100 + (this.str * 2);
 	}
 
 	public int getDex() {
 		return (int) dex;
 	}
 
-	public void setDex(int dex) {
+	public void setDex(int dex , int key) {
 		this.dex = dex;
+		if(key == 1) {
+			this.arm = 10 + (this.dex / 2);
+		}else if(key==2) {
+			this.arm = 5 + (this.dex / 2);
+		}else if(key==3) {
+			this.arm = 1 + (this.dex / 2);
+		}
 	}
 
 	public int getLnt() {
@@ -113,6 +129,7 @@ public class gameCharacterDTO {
 
 	public void setLnt(int lnt) {
 		this.lnt = lnt;
+		this.mp = 100 + (lnt * 3);
 	}
 
 	public int getLuk() {
@@ -161,6 +178,14 @@ public class gameCharacterDTO {
 
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
 	@Override
